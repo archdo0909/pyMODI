@@ -33,7 +33,7 @@ class BleTask(ConnTask):
     def _open_conn(self):
         os.system("sudo hciconfig hci0 up")
         self.adapter.start()
-        self.__connect("MODI_7EF42AFB")
+        self.__connect("MODI_4DD5FA00")
 
     def _close_conn(self):
         # Reboot modules to stop receiving channel messages
@@ -59,19 +59,19 @@ class BleTask(ConnTask):
         else:
             self._write_data(message_to_write)
             print("send_msg:", message_to_write)
-    
+
     def _write_data(self, str_msg):
         json_msg = json.loads(str_msg)
         ble_msg = self.__compose_ble_msg(json_msg)
 
         # TODO: Catch exception
         self.device.char_write(self.char_uuid, ble_msg)
-    
+
     def run_read_data(self, delay):
         self.device.subscribe(self.char_uuid, callback=self.__ble_read)
         while True:
             time.sleep(delay)
-    
+
     def run_write_data(self, delay):
         while True:
             self.__ble_write()
@@ -101,7 +101,7 @@ class BleTask(ConnTask):
         ble_msg[8:8+dlc] = bytearray(base64.b64decode(data))
 
         return ble_msg
-    
+
     def __parse_ble_msg(self, ble_msg):
         json_msg = dict()
         json_msg["c"] = ble_msg[1] << 8 | ble_msg[0]
