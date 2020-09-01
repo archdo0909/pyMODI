@@ -35,7 +35,7 @@ class AICamera:
         :rtype: String list
         """
         ai_cam_id_vendor = 0x0c45
-        ai_cam_id_product = 0x62c0
+        ai_cam_id_product = 0x6366
 
         dev = core.find(
             idVendor=ai_cam_id_vendor,
