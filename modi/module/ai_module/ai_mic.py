@@ -1,3 +1,5 @@
+import os
+import subprocess
 import soundfile as sf
 import sounddevice as sd
 
@@ -31,8 +33,20 @@ class AIMic:
         :type duration: float
         :return: Numpy array of the recording
         """
-        data = sd.rec(duration * self.RATE,
-                      samplerate=self.RATE,
-                      channels=1)
-        sd.wait()
-        return data, self.RATE
+        if os.path.exists('/var/run/gpio_fan.pid'):
+            subprocess.run(["sudo", "python3",
+                "/usr/src/rpi-daemon-py/gpio_fan.py", "stop"])
+            data = sd.rec(duration * self.RATE,
+                          samplerate=self.RATE,
+                          channels=1)
+            sd.wait()
+            subprocess.run(["sudo", "python3",
+                "/usr/src/rpi-daemon-py/gpio_fan.py", "start"])
+            return data, self.RATE
+
+        else:
+            data = sd.rec(duration * self.RATE,
+                          samplerate=self.RATE,
+                          channels=1)
+            sd.wait()
+            return data, self.RATE
