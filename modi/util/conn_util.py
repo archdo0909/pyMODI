@@ -5,15 +5,6 @@ import serial.tools.list_ports as stl
 from serial.tools.list_ports_common import ListPortInfo
 
 
-def is_on_pi() -> bool:
-    """Returns whether connected to pi
-
-    :return: true if connected to pi
-    :rtype: bool
-    """
-    return os.name != "nt" and os.uname()[4][:3] == "arm"
-
-
 def list_modi_ports() -> List[ListPortInfo]:
     """Returns a list of connected MODI ports
 
