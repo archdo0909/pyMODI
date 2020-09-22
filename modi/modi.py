@@ -12,9 +12,8 @@ from modi._exe_thrd import ExeThrd
 from modi.module.ai_module.ai_camera import AICamera
 from modi.module.ai_module.ai_speaker import AISpeaker
 from modi.module.ai_module.ai_mic import AIMic
-from modi.util.conn_util import is_modi_pi, AIModuleNotFoundException, \
-    AIModuleFaultsException
-from modi.util.conn_util import is_network_module_connected, is_on_pi
+from modi.util.conn_util import is_modi_pi, is_network_module_connected,\
+    is_on_pi, AIModuleFaultsException, AIModuleNotFoundException
 from modi.util.misc import module_list
 from modi.util.stranger import check_complete
 from modi.util.upython import upload_file
