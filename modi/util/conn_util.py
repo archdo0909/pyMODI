@@ -32,7 +32,10 @@ def list_modi_ports() -> List[ListPortInfo]:
     def __is_modi_port(port):
         return (
             port.manufacturer == "LUXROBO"
-            or port.product == "MODI Network Module"
+            or port.product in ( "MODI Network Module",
+                "MODI Network Module(BootLoader)",
+                "STM32 Virtual ComPort",
+                )
             or port.description == "MODI Network Module"
             or (port.vid == 0x2fdc and port.pid == 0x2))
 
